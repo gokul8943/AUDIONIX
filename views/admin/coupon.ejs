@@ -1,0 +1,272 @@
+<%- include('../layouts/adminheader.ejs') %>
+<div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index.html" class="brand-wrap">
+                <img src="/adminassets/imgs/theme/logos.png" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/userlist">  <i class="icon material-icons md-person"></i>
+                        <span class="text">User</span>
+                    </a>
+ 
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-store"></i>
+                        <span class="text">Category</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Product</span>
+                    </a>
+                </li>
+        
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                   
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/salesReport"> <i class="icon material-icons md-monetization_on"></i>
+                        <span class="text">SalesReprot</span>
+                    </a>
+                   
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/coupon"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Coupon</span>
+                    </a>
+            
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/bannerlist"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">banner</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brands</span> </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Statistics</span>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Starter page </span>
+                    </a>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </nav>
+    </aside>
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <option value="Apple iphone">
+                        <option value="Ahmed Hassan">
+                    </datalist>
+                </form>
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon" href="#">
+                            <i class="material-icons md-notifications animation-shake"></i>
+                            <span class="badge rounded-pill">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English">English</a>
+                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français">Français</a>
+                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
+                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar2.jpg" alt="User"></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                            
+                            <a class="dropdown-item text-danger" href="/admin/logout"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Coupon List </h2>
+                </div>
+                <div>
+                    <a href="/admin/couponadd" class="btn btn-primary btn-sm rounded">Add Coupon</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    <div class="row gx-3">
+                        <div class="col-lg-4 col-md-6 me-auto">
+                            <input type="text" placeholder="Search..." class="form-control">
+                        </div>
+                        <div class="col-lg-2 col-6 col-md-3">
+                          
+                        </div>
+                        <div class="col-lg-2 col-6 col-md-3">
+                          
+                        </div>
+                    </div>
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle" scope="col">Coupon Code</th>
+                                    <th class="align-middle" scope="col">Discount</th>
+                                    <th class="align-middle" scope="col">Created Date</th>
+                                    <th class="align-middle" scope="col">Expiry Date</th>
+                                    <th class="align-middle" scope="col">limit</th>
+                                    <th class="align-middle" scope="col">Minimum Amount</th>
+                                    <th class="align-middle" scope="col">Redeemable Amount</th>
+                                    <th class="align-middle" scope="col">Status</th>
+                                    <th class="align-middle" scope="col">Action</th>              
+                                  </tr>
+                            </thead>
+                            <tbody>
+                                <% coupon.forEach((coupon) => { %>
+                                    <tr style="height: 80px;" >                    
+                                    <td><%= coupon.code %></td>
+                                    <td><% if (coupon.type === 'fixed') { %>
+                                        ₹<%= coupon.discount %>
+                                      <% } else { %>
+                                        <%= coupon.discount %>%
+                                      <% } %></td>
+                                    <td><%= new Date(coupon.createdDate).toLocaleDateString() %></td>
+                                    <td><%= new Date(coupon.expiry).toLocaleDateString() %></td>
+                                    <td><%= coupon.limit %> </td>
+                                    <td ><%= coupon.minCartAmt %> </td>
+                                    <td><%= coupon.maxReedemadbleAmt %> </td>
+                                    <td>   <% if (coupon.is_listed == true) { %>
+                        
+                                        <div class="col-lg-2 col-sm-2 col-4 col-status">
+                                            <span class="badge rounded-pill alert-success">listed</span>
+                                        </div>
+                                        <% } else { %>
+                                            <div class="col-lg-2 col-sm-2 col-4 col-status">
+                                                <span class="badge rounded-pill alert-danger">unlisted</span>
+                                            </div>
+                                    <% } %></td>
+                                    <td>  <a href="/admin/couponDetails?couponId=<%= coupon._id %>" class="btn btn-secondary">Details</a>
+                                        <div class="dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-xs">
+                                              <i class="material-icons md-more_horiz"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item font-xs" href="/admin/couponedit?couponId=<%= coupon._id %>">Edit</a>
+                                              <% if (coupon.is_listed) { %>
+                                                <a href="/admin/couponblock?couponId=<%= coupon._id.toString() %>">
+                                                  <p class="text-danger ms-4 font-xs">Unlist</p>
+                                                </a>
+                                              <% } else { %>
+                                                <a href="/admin/couponblock?couponId=<%= coupon._id.toString() %>">
+                                                  <p class="text-primary ms-4 font-xs">List</p>
+                                                </a>
+                                              <% } %>
+                                            </div>
+                                          </div> <!-- dropdown //end -->
+                                    </td>
+                                </tr>
+                                <% } )%>  
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+            <div class="pagination-area mt-15 mb-50">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start">
+                        <% if (currentPage > 1) { %>
+                            <li class="page-item">
+                              <a class="page-link" href="?page=<%= currentPage - 1 %>"><</a>
+                            </li>
+                          <% } %>
+                      
+                          <% for (let i = 1; i <= totalPage; i++) { %>
+                            <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                              <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                            </li>
+                          <% } %>
+                      
+                          <% if (currentPage < totalPage) { %>
+                            <li class="page-item">
+                              <a class="page-link" href="?page=<%= currentPage + 1 %>">></a>
+                            </li>
+                          <% } %>
+                    </ul>
+                </nav>
+            </div>
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="assets/js/main.js" type="text/javascript"></script>
+
+    <%- include('../layouts/adminfooter.ejs') %>

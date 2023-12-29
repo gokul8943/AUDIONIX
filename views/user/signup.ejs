@@ -1,0 +1,153 @@
+<%- include('../layouts/header.ejs') %>
+
+<main class="main" style="margin-top: -70px;">
+    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-color: rgb(255, 255, 255); border-radius: 15px;">
+        <div class="container">
+            <div class="form-box">
+                <div class="form-tab">
+                    <ul class="nav nav-pills nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <h2 class="nav-link">Create Account</h2>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="signup" aria-labelledby="signup-tab">
+                            <form action="" method="post" id="registration-form">
+                                <input type="hidden" id="registration-success" name="registrationSuccess" value="false">
+                                <div class="form-group">
+                                    <label for="singin-username">Username</label>
+                                    <input type="text" class="form-control" id="singin-username" name="username">
+                                    <div class="error-message" style="color: red;" id="username-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="singin-email-2">Email address</label>
+                                    <input type="email" class="form-control" id="singin-email-2" name="email">
+                                    <div class="error-message" style="color: red;" id="email-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="singin-phone">Phone Number</label>
+                                    <input type="text" class="form-control" id="singin-phone" name="phone">
+                                    <div class="error-message" style="color: red;" id="phone-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="singin-password-2">Password</label>
+                                    <input type="password" class="form-control" id="singin-password-2" name="password">
+                                    <div class="error-message" style="color: red;" id="password-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="singin-confirm-password">Confirm Password</label>
+                                    <input type="password" class="form-control" id="singin-confirm-password" name="confirmPassword">
+                                    <div class="error-message" style="color: red;" id="confirmPassword-error"></div>
+                                </div>
+                                <div style="display: flex; justify-content: center;">
+                                    <button type="submit" class="btn btn-primary" style="padding: 10px;">
+                                        <span>Register</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="text-center">
+                                <% if (typeof message !== 'undefined' && message) { %>
+                                    <p style="color: green;"><%= message %></p>
+                                <% } %>
+                            </div>
+                            <div class="text-center">
+                                <% if (typeof error !== 'undefined' && error) { %>
+                                    <p style="color: red;"><%= error %></p>
+                                <% } %>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-center">Already have an account?</p>
+                                <p class="text-center"><a href="/login">Login</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+    document.getElementById('registration-form').addEventListener('submit', function (e) {
+        // Get form input values
+        const usernameInput = document.getElementById('singin-username');
+        const emailInput = document.getElementById('singin-email-2');
+        const phoneInput = document.getElementById('singin-phone');
+        const passwordInput = document.getElementById('singin-password-2');
+        const confirmPasswordInput = document.getElementById('singin-confirm-password');
+
+        // Get error message elements
+        const usernameError = document.getElementById('username-error');
+        const emailError = document.getElementById('email-error');
+        const phoneError = document.getElementById('phone-error'); // Corrected variable name
+        const passwordError = document.getElementById('password-error');
+        const confirmPasswordError = document.getElementById('confirmPassword-error');
+
+        // Reset previous error messages
+        usernameError.textContent = '';
+        emailError.textContent = '';
+        phoneError.textContent = ''; // Corrected variable name
+        passwordError.textContent = '';
+        confirmPasswordError.textContent = '';
+
+        // Validate username field
+        if (usernameInput.value.trim() === '') {
+            e.preventDefault();
+            usernameError.textContent = 'Username is required';
+            usernameInput.focus();
+            return;
+        }
+
+        // Validate email field
+        if (emailInput.value.trim() === '') {
+            e.preventDefault();
+            emailError.textContent = 'Email is required';
+            emailInput.focus();
+            return;
+        }
+
+        // Validate phone number field
+        if (phoneInput.value.trim() === '') {
+            e.preventDefault();
+            phoneError.textContent = 'Phone number is required';
+            phoneInput.focus();
+            return;
+        }
+        // Validate phone number to contain only ten digits and no spaces
+        const phonePattern = /^\d{10}$/;
+        if (!phonePattern.test(phoneInput.value)) {
+            e.preventDefault();
+            phoneError.textContent = 'Phone number must have exactly 10 digits with no spaces';
+            phoneInput.focus();
+            return;
+        }
+
+        // Validate password field
+        if (passwordInput.value.trim() === '') {
+            e.preventDefault();
+            passwordError.textContent = 'Password is required';
+            passwordInput.focus();
+            return;
+        }
+
+        // Validate confirm password field
+        if (confirmPasswordInput.value.trim() === '') {
+            e.preventDefault();
+            confirmPasswordError.textContent = 'Confirm Password is required';
+            confirmPasswordInput.focus();
+            return;
+        }
+
+        // Check if password and confirm password match
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            e.preventDefault();
+            passwordError.textContent = 'Passwords do not match';
+            confirmPasswordError.textContent = 'Passwords do not match';
+            passwordInput.focus();
+            return;
+        }
+    });
+    document.getElementById('registration-success').value = "true";
+</script>

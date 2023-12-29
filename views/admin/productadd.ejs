@@ -1,0 +1,476 @@
+<%- include('../layouts/adminheader.ejs')%>
+
+<div class="screen-overlay"></div>
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="index.html" class="brand-wrap">
+            <img src="/adminassets/imgs/theme/logos.png" class="logo" alt="Evara Dashboard">
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/userlist">  <i class="icon material-icons md-person"></i>
+                    <span class="text">User</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-store"></i>
+                    <span class="text">Category</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Product</span>
+                </a>
+            </li>
+    
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/salesReport"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">SalesReprot</span>
+                </a>
+               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/coupon"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Coupon</span>
+                </a>
+        
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/bannerlist"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">banner</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brands</span> </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Statistics</span>
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                    <span class="text"> Starter page </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+            <form class="searchform">
+                <div class="input-group">
+                    <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                    <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+                </div>
+                <datalist id="search_terms">
+                    <option value="Products">
+                    <option value="New orders">
+                    <option value="Apple iphone">
+                    <option value="Ahmed Hassan">
+                </datalist>
+            </form>
+        </div>
+        <div class="col-nav">
+            <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link btn-icon" href="#">
+                        <i class="material-icons md-notifications animation-shake"></i>
+                        <span class="badge rounded-pill">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                        <a class="dropdown-item text-brand" href="#"><img src="/adminassets/imgs/theme/flag-us.png" alt="English">English</a>
+                        <a class="dropdown-item" href="#"><img src="/adminassets/imgs/theme/flag-fr.png" alt="Français">Français</a>
+                        <a class="dropdown-item" href="#"><img src="/adminassets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
+                        <a class="dropdown-item" href="#"><img src="/adminassets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="/adminassets/imgs/people/user.png" alt="User"></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                        
+                        <a class="dropdown-item text-danger" href="/admin/logout"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+ <form action="/admin/product"  method="post" enctype="multipart/form-data" onsubmit="return validateProductForm()" >
+    <section class="content-main">
+        <div class="row">
+            <div class="col-9">
+                <div class="content-header">
+                    <h2 class="content-title">Add New Product</h2>
+                    <div>
+                    <input type="submit" class="btn btn-md rounded font-sm hover-up" value="save" onsubmit="">                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="product_title" class="form-label">Model Name</label>
+                            <input type="text" name="name" placeholder="Type here" class="form-control" id="product-title">
+                            <div class="error-message" style="color:red;" id="product-title-error"></div>
+                        </div>
+                        <div class="row gx-3">
+                            <div class="col-md-4  mb-3">
+                                <label for="product_sku" class="form-label">Price</label>
+                                <input type="text" name="price" placeholder="Type here" class="form-control" id="product-price">
+                                <div class="error-message" style="color: red;" id="product-price-error"></div>
+                            </div>
+                            <div class="col-md-4  mb-3">
+                                <label for="product_size" class="form-label">Colour</label>
+                                <input type="text" name="color" placeholder="Type here" class="form-control" id="product-color">
+                                <div class="error-message" style="color:red;" id="product-color-error"></div>
+                            </div>
+                            <div class="col-md-4  mb-3">
+                                <label for="product_size" class="form-label">Discount Price</label>
+                                <input type="text" name="discountPrice" placeholder="Type here" class="form-control" id="product-discountPrice">
+                                <div class="error-message" style="color: red;" id="product-discountPrice-error"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="product_brand" class="form-label">Brand</label>
+                            <input type="text" name="brand" placeholder="Type here" class="form-control" id="product-brand">
+                            <div class="error-message" style="color: red;" id="product-brand-error"></div>
+                        </div>
+                    </div>
+                </div> <!-- card end// -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div>
+                            <label class="form-label">Description</label>
+                            <textarea placeholder="Type here" name="description" class="form-control" rows="4" id="product-descripition"></textarea>
+                            <div class="error-message" style="color:red;" id="product-descripition-error"></div>
+                        </div>
+                    </div>
+                </div> <!-- card end// -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                            
+                        <div class="images-container">
+                            <!-- Add Product Images Here -->
+                        </div>
+                        <button type="button" class="btn btn-primary mb-3" onclick="addImage()">Add Image</button>
+                        <button type="button" class="btn btn-danger mb-3" onclick="deleteImages()">Delete Selected Images</button>
+                    </div>
+
+                </div> <!-- card end// -->
+            </div>
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label class="form-label">Battery capacity</label>
+                            <input type="text" name="batteryCapacity" placeholder="Type here" class="form-control" id="product-batteryCapacity">
+                            <div class="error-message" style="color:red;" id="product-batteryCapacity-error"></div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Type</label>
+                            <input type="text" name="type" placeholder="Type here" class="form-control" id="product-type">
+                            <div class="error-message" style="color:red;" id="product-type-error"></div>
+                        </div>
+                       
+                        <hr>
+                        <h5 class="mb-3">Categories</h5>
+                        <%
+                        if (Categories && Categories.length > 0) {
+                        %>
+                            <div class="form-group">
+                                <select class="form-control" name="category" id="product-cat">
+                                    <%
+                                    Categories.forEach(function(category) {
+                                    %>
+                                        <option value="<%= category.name %>"><%= category.name %></option>
+                                    <%
+                                    });
+                                    %>
+                                </select>
+                            </div>
+                        <%
+                        }
+                        %>
+                        <br>
+                        <h5 class="mb-3">Connectivity</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" name="connect" type="radio" value="true" id="product-cat-3">
+                            <label class="form-check-label" for="product-cat-3">Wireless</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="connect" type="radio" value="false" id="product-cat-3">
+                            <label class="form-check-label" for="product-cat-3">Wired</label>
+                        </div>
+                    </div>
+                </div> <!-- card end// -->
+
+            </div>
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label class="form-label">Quantity</label>
+                            <input type="text" name="quantity" placeholder="Type here" class="form-control" id="product-quantity">
+                            <div class="error-message" style="color:red;" id="product-quantity-error"></div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Driver Units</label>
+                            <input type="text" name="driverUnits" placeholder="Type here" class="form-control" id="product-driverUnits">
+                            <div class="error-message" style="color:red;" id="product-driverUnits-error"></div>
+
+                        </div>
+                        <hr>
+                        <h5 class="mb-3">Noise Cancellation</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" name="noise" type="radio" value="true" id="product-cat">
+                            <label class="form-check-label" for="product-cat">Yes</label>
+                        </div> 
+                        <div class="form-check">
+                            <input class="form-check-input" name="noise" type="radio" value="false" id="product-cat-3">
+                            <label class="form-check-label" for="product-cat-3"> NO</label>
+                        </div><br><br>
+                        
+                      
+                        <h5 class="mb-3">MicroPhone</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" name="microPhone" type="radio" value="true" id="product-cat-3">
+                            <label class="form-check-label" for="product-cat-3">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="microPhone" type="radio" value="false" id="product-cat-3">
+                            <label class="form-check-label" for="product-cat-3">NO</label>
+                        </div>
+                    </div>
+                </div> 
+        </div>
+    </section>
+</form>
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
+                document.write(new Date().getFullYear())
+                </script> ©, AUDIONIX.
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+
+    
+<script src="/adminassets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="/adminassets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="/adminassets/js/vendors/select2.min.js"></script>
+<script src="/adminassets/js/vendors/perfect-scrollbar.js"></script>
+<script src="/adminassets/js/vendors/jquery.fullscreen.min.js"></script>
+<!-- Main Script -->
+<script src="../../public/adminassets/js/main.js" type="text/javascript"></script>
+
+<script>
+    function validateProductForm() {
+        
+        clearErrorMessages();
+
+        
+        var name = document.getElementById('product-title').value;
+        var price = document.getElementById('product-price').value;
+        var color = document.getElementById('product-color').value;
+        var discountPrice = document.getElementById('product-discountPrice').value;
+        var brand = document.getElementById('product-brand').value;
+        var description = document.getElementById('product-descripition').value;
+        var batteryCapacity = document.getElementById('product-batteryCapacity').value;
+        var type = document.getElementById('product-type').value;
+        var quantity = document.getElementById('product-quantity').value;
+        var driverUnits = document.getElementById('product-driverUnits').value;
+
+        
+        if (!name ){
+            displayErrorMessage('product-title', 'Model Name is required.');
+            return false;
+        }
+        if(!price){
+            displayErrorMessage('product-price', 'Price is required.');
+            return false;
+        }
+        if (isNaN(parseFloat(price)) || parseFloat(price) < 0) {
+          displayErrorMessage('product-price', 'Please enter a valid price no negative number.');
+          return false;
+         } 
+
+        if(!color){
+            displayErrorMessage('product-color', 'Colour is required.');
+            return false;
+        }
+        if(!discountPrice){
+            displayErrorMessage('product-discountPrice', 'Discount Price is required.');
+            return false;
+        }
+    if( !brand ){
+        displayErrorMessage('product-brand', 'Brand is required.');
+        return false;
+    }
+    if(!description){
+        displayErrorMessage('product-descripition', 'Description is required.');
+        return false;
+    }
+      if(!batteryCapacity){
+        displayErrorMessage('product-batteryCapacity','batteryCapacity is required');
+        return false;
+      }
+      if(!type){
+        displayErrorMessage('product-type','type is required');
+        return false;
+      }
+      if(!quantity){
+        displayErrorMessage('product-quantity','quantity is is required');
+        return false;
+      }
+      if (!/^\d+$/.test(quantity) || parseInt(quantity) < 0) {
+        displayErrorMessage('product-quantity', 'Please enter a valid quantity.');
+        return false;
+      }
+
+
+        if(!driverUnits){
+            displayErrorMessage('product-driverUnits','driverUnits is required');
+            return false;
+        }
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+        if (!allowedExtensions.exec(image.value)) {
+            displayErrorMessage('image', 'Invalid file type. Please upload only images (jpg, jpeg, png, gif).');
+            image.value = ''; 
+            return false;
+        }
+        return true;
+    }
+
+    function clearErrorMessages() {
+        
+        var errorElements = document.getElementsByClassName('error-message');
+        for (var i = 0; i < errorElements.length; i++) {
+            errorElements[i].innerText = '';
+        }
+    }
+
+    function displayErrorMessage(fieldId, message) {
+        
+        var errorElement = document.getElementById(fieldId + '-error');
+        if (errorElement) {
+            errorElement.innerText = message;
+        }
+    }
+
+        let imageCount = 0;
+    
+const selectedImages = [];
+
+function addImage() {
+    if (imageCount < 4) {
+        imageCount++;
+        const container = document.querySelector('.images-container');
+        const imageDiv = document.createElement('div');
+        imageDiv.classList.add('mb-4');
+        imageDiv.innerHTML = `
+            <label class="form-label">Image ${imageCount}</label>
+            <div class="image-container">
+                <img src="" alt="" id="image-preview${imageCount}">
+            </div>
+            <input class="form-control" name="image${imageCount}" type="file" onchange="displayImage(${imageCount}, this)" accept="image/*">
+            <input type="checkbox" class="image-checkbox" onchange="toggleImageSelection(${imageCount}, this)">
+        `;
+        container.appendChild(imageDiv);
+    }
+}
+
+
+function displayImage(imageNumber, input) {
+    const preview = document.getElementById(`image-preview${imageNumber}`);
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '';
+    }
+}
+
+function toggleImageSelection(imageNumber, checkbox) {
+    // Add or remove the image number from the selectedImages array
+    if (checkbox.checked) {
+        selectedImages.push(imageNumber);
+    } else {
+        const index = selectedImages.indexOf(imageNumber);
+        if (index !== -1) {
+            selectedImages.splice(index, 1);
+        }
+    }
+}
+
+function deleteImage(imageNumber) {
+    const imageDiv = document.getElementById(`image-preview${imageNumber}`).closest('.mb-4');
+    if (imageDiv) {
+        imageDiv.remove();
+    }
+}
+
+function deleteImages() {
+    // Remove the selected images from the DOM
+    selectedImages.forEach((imageNumber) => {
+        deleteImage(imageNumber);
+    });
+
+    // Clear the selectedImages array
+    selectedImages.length = 0;
+}
+
+    </script>
+
+
+<%- include('../layouts/adminfooter.ejs') %>

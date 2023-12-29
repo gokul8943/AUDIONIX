@@ -1,0 +1,64 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Verification</h5>
+        <span class="mobile-text">Enter the code we just sent on your email <b class="text-danger"></b></span>
+        <form action="" method="post"> 
+            <div class="d-flex flex-row mt-5 ml-5 mr-5">
+                <input type="text" class="form-control" name="otp1" autofocus maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp2" maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp3" maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp4" maxlength="1">
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button> <!-- Add a submit button -->
+        </form>
+        <!-- <span id="otp-expiry-time" class="mobile-text"></span>
+        <a id="resend-button" href="/resendotp" class="forgot-link disabled">Resend Otp</a>
+        <span id="resend-timer"></span> -->
+    </div>
+</div>
+<script>
+    function moveToNextInput(currentInput, nextInput) {
+        if (currentInput.value.length > 0) {
+            nextInput.focus();
+        }
+    }
+
+    function moveToPreviousInput(currentInput, previousInput) {
+        if (currentInput.value.length === 0) {
+            previousInput.focus();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const otpInputs = [
+            document.querySelector('input[name="otp1"]'),
+            document.querySelector('input[name="otp2"]'),
+            document.querySelector('input[name="otp3"]'),
+            document.querySelector('input[name="otp4"]')
+        ];
+
+        otpInputs.forEach(function (otpInput, index) {
+            otpInput.addEventListener("input", function () {
+                if (index < otpInputs.length - 1) {
+                    moveToNextInput(otpInput, otpInputs[index + 1]);
+                }
+            });
+
+            otpInput.addEventListener("keydown", function (event) {
+                if (event.key === "ArrowRight" && index < otpInputs.length - 1) {
+                    moveToNextInput(otpInput, otpInputs[index + 1]);
+                } else if (event.key === "ArrowLeft" && index > 0) {
+                    moveToPreviousInput(otpInput, otpInputs[index - 1]);
+                }
+            });
+        });
+    });
+
+</script>
+
+<%- include('../layouts/footer.ejs') %>

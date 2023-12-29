@@ -1,0 +1,121 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Verification</h5>
+        <span class="mobile-text">Enter the code we just sent on your email <b class="text-danger"></b></span>
+        <form action="" method="post"> <!-- Use a form to submit OTP -->
+            <div class="d-flex flex-row mt-5 ml-5 mr-5">
+                <input type="text" class="form-control" name="otp1" autofocus maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp2" maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp3" maxlength="1">
+                <br>
+                <input type="text" class="form-control" name="otp4" maxlength="1">
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button> <!-- Add a submit button -->
+        </form>
+        <!-- <form action="/resendotp" method="post"> -->
+        <span id="otp-expiry-time" class="mobile-text" value="expiry in 2 minutes">OTP expiry in 2 minutes</span><br>
+        <a id="resend-button" href="/resendotp" class="forgot-link disabled">Resend Otp</a>
+        <!-- <input type="submit" value="Resend Otp" class="forgot-link disabled" id="resend-button"> -->
+        <p>After 30 seconds resend : </p> <span id="resend-timer"></span>
+        <!-- </form> -->
+    </div>
+</div>
+<script>
+    function moveToNextInput(currentInput, nextInput) {
+        if (currentInput.value.length > 0) {
+            nextInput.focus();
+        }
+    }
+
+    function moveToPreviousInput(currentInput, previousInput) {
+        if (currentInput.value.length === 0) {
+            previousInput.focus();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const otpInputs = [
+            document.querySelector('input[name="otp1"]'),
+            document.querySelector('input[name="otp2"]'),
+            document.querySelector('input[name="otp3"]'),
+            document.querySelector('input[name="otp4"]')
+        ];
+
+        otpInputs.forEach(function (otpInput, index) {
+            otpInput.addEventListener("input", function () {
+                if (index < otpInputs.length - 1) {
+                    moveToNextInput(otpInput, otpInputs[index + 1]);
+                }
+            });
+
+            otpInput.addEventListener("keydown", function (event) {
+                if (event.key === "ArrowRight" && index < otpInputs.length - 1) {
+                    moveToNextInput(otpInput, otpInputs[index + 1]);
+                } else if (event.key === "ArrowLeft" && index > 0) {
+                    moveToPreviousInput(otpInput, otpInputs[index - 1]);
+                }
+            });
+        });
+    });
+
+
+
+// Get the OTP expiration time from the server (in seconds)
+const otpExpiryTimeInSeconds = 120;
+
+// Function to update the OTP expiry timer
+function updateOTPTimer() {
+    const otpExpiryTimeElement = document.getElementById('otp-expiry-time');
+    const currentTime = new Date().getTime();
+    const otpGeneratedTime = <%= otpGeneratedTime %>;
+    const timeRemaining = Math.max(0, otpExpiryTimeInSeconds - Math.floor((currentTime - otpGeneratedTime) / 1000));
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    otpExpiryTimeElement.textContent = formattedTime;
+
+    if (timeRemaining > 0) {
+        setTimeout(updateOTPTimer, 1000);
+    }
+}
+
+updateOTPTimer();
+
+const resendButton = document.getElementById('resend-button');
+const resendTimer = document.getElementById('resend-timer');
+
+const countdownDuration = 30;
+const otpGeneratedTime = <%= otpGeneratedTime %>;
+
+function updateResendTimer() {
+    const currentTime = Date.now();
+    const timeElapsedInSeconds = Math.floor((currentTime - otpGeneratedTime) / 1000);
+    const remainingTime = countdownDuration - timeElapsedInSeconds;
+
+    if (remainingTime <= 0) {
+        resendButton.classList.remove('disabled');
+        resendButton.removeAttribute('disabled'); // Remove disabled attribute
+        resendTimer.textContent = '0';
+    } else {
+        resendButton.classList.add('disabled');
+        resendButton.setAttribute('disabled', 'true'); // Set disabled attribute
+        resendTimer.textContent = remainingTime;
+        setTimeout(updateResendTimer, 1000);
+    }
+}
+
+updateResendTimer();
+
+
+
+
+</script>
+
+<%- include('../layouts/footer.ejs') %>
+
+
+

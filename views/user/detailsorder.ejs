@@ -1,0 +1,275 @@
+<%- include('../layouts/header.ejs')%>
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('../../Public/assets/images/userProfile/andras-vas-Bd7gNnWJBkU-unsplash.jpg')">
+        <div class="container">
+            <h1 class="page-title" style="color: white;">My Account<span>Shop</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+   
+    <div class="page-content mt-4">
+        <div class="dashboard">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-md-4 col-lg-2">
+                        <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link"  href="/userDashboard" aria-selected="true">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="/userProfile"  aria-selected="false">Account Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="/wallet"  aria-selected="false">Wallet</a>
+                            </li>
+                    
+                            <li class="nav-item">
+                              <a class="nav-link active"  href=""  aria-selected="false">Order Details</a>
+                          </li>
+                
+                            <li class="nav-item">
+                                <a class="nav-link" href="/userAddress"  aria-selected="false">Adresses</a>
+                            </li>
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Sign Out</a>
+                            </li>
+                        </ul>
+                    </aside><!-- End .col-lg-3 -->
+
+                    <div class="col-md-8 col-lg-10">
+                        
+
+                        <h2 class=" fw-bold me-4" style="margin-left: 15px;">Order Details:-</h2>
+
+                                
+                        <div class="d-flex mt-4" style=" justify-content: space-around;">
+                            <div class="card shadow-0 col-md-10 border d-flex align-items-center" style="width: 45%;">
+                                <h3 class="mt-4"><i style="color: #39f; font-size:x-large;" class="fa-solid fa-truck-fast"></i>&nbsp; Payment Details: </h3>
+    
+                                <div class="card-body d-flex align-items-center flex-column justify-content-around">
+                                    <div>
+                                        <span style="color:  #000000;;" class="fw-bold me-4">Payment:-</span><%= order.paymentMethod %><br />
+                                    </div>
+                                    <div>
+                                        <span style="color:  #000000;;" class="fw-bold me-4">Shipping:-</span><%= order.shipping %><br />
+                                    </div>
+                                    <div>
+                                        <span style="color:  #000000;;" class="fw-bold me-4">Order Status:-</span> <% if (order.status === 'Pending') { %>
+                                            <span class="badge badge-pill badge-warning"><%= order.status %></span>
+                                        <% } else if (order.status === 'Order Confirmed') { %>
+                                            <span class="badge badge-pill badge-warning"><%= order.status %></span>
+                                        <% } else if (order.status === 'Shipped') { %>
+                                            <span class="badge badge-pill badge-dark"><%= order.status %></span>
+                                        <% } else if (order.status === 'Out For Delivery') { %>
+                                        <span class="badge badge-pill badge-dark"><%= order.status %></span>
+                                        <% } else if (order.status === 'Delivered') { %>
+                                         <span class="badge badge-pill badge-success"><%= order.status %></span>
+                                         <% } else if (order.status == 'Return Requested') { %>
+                                            <span class="badge badge-pill badge-info"><%= order.status %> </span>
+                                            <% } else if (order.status == 'Return Successfull') { %>
+
+                                                <span class="badge badge-pill badge-success"><%= order.status %> </span>
+                                        <% } else { %>
+                                        <span class="badge badge-pill badge-danger"><%= order.status %></span>
+                                        <% } %> <br />
+                                    </div>
+                                    <div>
+                                        <span style="color:  #000000;;" class="fw-bold me-4">Amount To pay:-</span><%= order.totalAmount %><br />
+                                    </div>
+                                    <div>
+                                        <span style="color:  #259552;;" class="fw-bold me-4">Delivery On:-</span>
+
+                                        <%if(order.status !== 'Cancelled'){ %>
+                                          <%= new Date(order.deliveryDate).toLocaleDateString() %>
+                                          <% } else{ %>
+                                            ------- 
+                                            <% } %>                                    
+                                        </div>
+                                                      
+                                </div>
+                            </div>
+                            <div class="card col-md-10 shadow-0 border d-flex align-items-center" style="width: 45%;">
+                                <h3 class="mt-4"><i style="color: #39f; font-size:x-large;" class="fa-solid fa-location-dot"></i>&nbsp; Order will be delivered to: </h3>
+    
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <%= order.address.name %><br />
+                                    <%= order.address.houseName %> <br />
+                                    <%= order.address.street %><br />
+                                    <%= order.address.city %><br />
+                                    <%= order.address.state %>,&nbsp; <%= order.address.pincode %><br />
+                                    <%= order.address.phone %><br />
+                                    <%= order.address.pincode %><br />
+                                    
+                                </div>
+                            </div>
+                            
+                          </div>
+                          
+                        <div class="" style="border-radius: 10px;">
+                          
+                            <div class="card-body p-4">
+                             
+                                <% order.items.forEach(function(item) { %>
+                
+                              <div class="card shadow-0 border mb-4" style="width: 100%; height: 200px;">
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-md-2">
+                                      <img src="/adminassets/productimages/<%= item.product.image[0] %>"
+                                        class="img-fluid" alt="Phone">
+                                    </div>
+                                    <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0"><%= item.product.name.slice(0, 50) + '...'  %></p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small"><%= item.product.brand%></p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small"><%= item.product.price%></p>
+                                    </div>
+                                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small"><%= item.quantity %></p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small"><%= item.product.price * item.quantity %></p>
+                                    </div>
+                                  </div>
+                           
+                                </div>
+                              </div>
+                              <% }); %>
+                
+                          
+                  
+                                <!--<div class="d-flex justify-content-between pt-2">
+                                <p class="text-muted mb-0 "><span class="fw-bold me-4">Invoice Number :</span> <%= order._id %></p>
+                              </div> -->
+                  
+                              
+                            <div class="card-footer border-0 px-4 py-5"
+                              style="background-color: #efefef; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                              <div class="d-flex flex-column justify-content-end">
+                                <h5 class="d-flex align-items-center justify-content-end text-muted  text-uppercase mb-0 fw-bold me-4">Total
+                                    Amount: <span class="h2 mb-0 ms-2"><%= order.totalAmount %></span>
+
+                                </h5>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    <% if (order.status == 'Cancelled') { %>
+                                        <span class="badge badge-pill badge-danger">Order Cancelled</span>
+                                    <% } else if (order.status == 'Return Requested') { %>
+                                        <span class="badge badge-pill badge-info"><%= order.status %> </span>
+                                        <% } else if (order.status == 'Return Successfull') { %>
+
+                                        <span class="badge badge-pill badge-success"><%= order.status %> </span>
+
+                                    <% } else { %>
+                                        <% if (order.status == 'Delivered') { %>
+                                            
+                                            <form action="/returnOrder" method="get" id="returnForm">
+
+                                                <div class="modal fade" id="returnOrderModal" tabindex="-1" role="dialog" aria-labelledby="returnOrderModalLabel" aria-hidden="true">
+
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content" style="border-radius: 10px;">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="returnOrderModalLabel">Return Order</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to return this order?</p>
+                                                                    <div class="form-group">
+                                                                        <label for="returnReason">Reason for Return:</label>
+                                                                        <textarea class="form-control" id="returnReason" name="reason" rows="3" placeholder="Enter reason for return"></textarea>
+                                                                        <small id="returnReasonError" class="text-danger"></small> <!-- Display error message here -->
+                                                                     </div>
+                                                                    <input type="hidden" name="orderId" value="<%= order._id %>">
+                                                                    <input type="hidden" name="status" value="Return Requested">
+                                                                    <button type="submit" class="btn btn-success btn-rounded btn-lg">Confirm Return</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form> 
+
+
+                                                                            
+                                        
+                                               <% } else { %>
+                                                                                        
+                                             
+                                                <a href="#" class="btn mt-5 btn-danger btn-rounded btn-lg" data-toggle="modal" data-target="#cancelOrderModal">Cancel Order</a>
+                                                <form action="/cancelOrder" method="get">
+                                                    <input type="hidden" value="<%= order._id %>" name="orderId">
+                                                    <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content" style="border-radius: 10px;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="cancelOrderModalLabel">Confirm Order Cancellation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to cancel this order?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="status" value="Cancel Requested">
+    
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                    <input type="submit" value="Confirm Cancellation" class="btn btn-danger btn-rounded btn-lg">
+                                                                    <% } %>
+                                                                    <span class="badge badge-pill badge-success"><%= order.paymentStatus %> </span>
+                                                                <% } %>
+                                                                    <!-- <a href="/cancelOrder?orderId=<%= order._id %>&reason=" + encodeURIComponent(document.getElementById('cancellationReason').value)" class="btn btn-danger btn-rounded btn-lg">Confirm Cancellation</a> -->
+                                                                </div>
+                                                              
+                                                            </div>
+                                                     
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </form>       
+                                            
+                                    
+                                </div>
+
+
+                
+                              </div>
+                             
+                
+                            </div>
+                          </div>
+                   
+                    </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+
+</main><!-- End .main -->
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const returnForm = document.getElementById('returnForm'); // Change this ID to match your form's ID
+        const returnReason = document.getElementById('returnReason');
+        const errorMessage = document.getElementById('returnReasonError');
+
+        returnForm.addEventListener('submit', function (event) {
+            if (returnReason.value.trim() === '') {
+                event.preventDefault(); // Prevent form submission
+                errorMessage.textContent = 'Please provide a reason for return.';
+            } else {
+                errorMessage.textContent = ''; // Clear previous error message
+            }
+        });
+    });
+
+</script>
+
+<%- include('../layouts/footer.ejs') %>

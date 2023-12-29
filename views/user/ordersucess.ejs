@@ -1,0 +1,86 @@
+<%- include('../Layouts/header.ejs') %>
+
+<section class=" gradient-custom">
+    <div class="container py-5 ">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col-lg-10 col-xl-8">
+          <div class="" style="border-radius: 10px;">
+            <div class="card-header px-4 py-5">
+              <h5 class="text-muted mb-0"><span style="font-size: 14px; color: #259552;">Order Success, Thanks for your Order    <i class="fa-solid fa-thumbs-up" style="font-size: large;"></i></span></h5>
+            </div>
+            <div class="card-body p-4">
+             
+              <% for (let i = 0; i < order.items.length; i++) { %>
+                <div class=" shadow-0 border mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <img src="adminassets/productimages/<%= order.items[i].product.image[0] %>"
+                          class="img-fluid" alt="Phone">
+                      </div>
+                      <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                        <p class="text-muted mb-0"><%= order.items[i].product.name.slice(0, 50) + '...'  %></p>
+                      </div>
+                      <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                        <p class="text-muted mb-0 small"><%= order.items[i].product.brand %></p>
+                      </div>
+                      <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                        <p class="text-muted mb-0 small"><%= order.items[i].product.discountPrice %></p>
+                      </div>
+                      <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                        <p class="text-muted mb-0 small"><%= order.items[i].quantity %></p>
+                      </div>
+                      <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                        <p class="text-muted mb-0 small"><%= order.items[i].product.discountPrice * order.items[i].quantity %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+              
+
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Order Details</p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> <%= order.subtotalWithShipping %></p>
+              </div>
+  
+                <div class="d-flex justify-content-between pt-2">
+                <p class="text-muted mb-0 "><span class="fw-bold me-4">Invoice Number :</span> <%= order._id %></p>
+              </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="text-muted mb-0 "><span class="fw-bold me-4">Payment Method :</span> <%= order.paymentMethod %></p>
+              </div>
+  
+              <!-- <div class="d-flex justify-content-between">
+                <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+              </div>  -->
+  
+              <div class="d-flex justify-content-between mb-5">
+                <p class="mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+              </div>
+            </div>
+            <div class="card-footer border-0 px-4 py-5"
+              style="background-color: #efefef; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+              <div class="" >
+                <h5 class="d-flex align-items-center justify-content-end text-muted  text-uppercase mb-0 fw-bold me-4">Total
+                    paid: <span class="h2 mb-0 ms-2"><%= order.totalAmount %></span>
+
+                </h5>
+                <div class="d-flex justify-content-center mt-3" >
+                  <a href="/generate-invoice/<%= order._id %>" class="btn btn-outline-primary-2 p-2">Generate Invoice</a>
+                  <a href="/orderDetails?orderId=<%= order._id %>" class="btn btn-outline-primary-2 p-2">Order Details</a>
+                  <a href="/shop" class="btn btn-outline-primary-2 p-2">Continue Shopping</a>
+
+                </div>
+
+              </div>
+             
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('../Layouts/footer.ejs') %>

@@ -1,0 +1,106 @@
+<%- include('../layouts/header.ejs') %>
+
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('../../Public/assets/images/userProfile/andras-vas-Bd7gNnWJBkU-unsplash.jpg')">
+        <div class="container">
+            <h1 class="page-title" style="color: white;">Order Details<span>Shop</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+   
+    <div class="page-content mt-4">
+        <div class="dashboard">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-md-4 col-lg-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Navigation</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="/profile" class="text-decoration-none">Profile</a></li>
+                                <li class="list-group-item"><a href="/changepassword" class="text-decoration-none">Change Password</a></li>
+                                <li class="list-group-item"><a href="/wallet" class="text-decoration-none">Wallets</a></li>
+                                <li class="list-group-item"><a href="/coupon" class="text-decoration-none">Coupon</a></li>
+                                <li class="list-group-item"><a href="/orderDetails" class="text-decoration-none">Order History</a></li>
+                                <li class="list-group-item"><a href="/address" class="text-decoration-none">Address</a></li>
+                                <li class="list-group-item"><a href="/logout" class="text-danger text-decoration-none">[-> Logout</a></li>
+                            </ul>
+                        </div>
+                    </aside><!-- End .col-lg-3 -->
+
+                    <div class="col-md-8 col-lg-10">
+                               <div class="card-body">
+                   
+                            <table id="products" class="table table-hover">
+                                <thead>
+                                  <tr style="  ">
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Ordered Date</th>
+                                    <th scope="col">Delivery Date</th>
+                                    <th scope="col">Payment Method</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (let i = 0; i < order.length; i++) { %>
+                                        <tr style="height: 80px;">
+                                            <td><%= order[i]._id %></td>
+                                            <td> &#8377 <%= order[i].totalAmount %></td>
+                                            <td><%= new Date(order[i].orderDate).toLocaleDateString() %></td>
+                                            <td>
+                                                <% if (order[i].status !== 'Cancelled') { %>
+                                                    <%= new Date(order[i].deliveryDate).toLocaleDateString() %>
+                                                <% } else { %>
+                                                    -------
+                                                <% } %>
+                                            </td>
+                                            <td><%= order[i].paymentMethod %></td>
+                                            <td>
+                                                <% if (order[i].paymentStatus == 'Pending') { %>
+                                                    <span class="badge badge-pill badge-warning"><%= order[i].paymentStatus %></span>
+                                                <% } else if (order[i].paymentStatus == 'Payment Successful' || order.paymentStatus == 'Refunded') { %>
+                                                    <span class="badge badge-pill badge-success"><%= order[i].paymentStatus %></span>
+                                                <% } else { %>
+                                                    <span class="badge badge-pill badge-danger"><%= order[i].paymentStatus %></span>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <% if (order[i].status === 'Pending' || order[i].status === 'Order Confirmed') { %>
+                                                    <span class="badge badge-pill badge-warning"><%= order[i].status %></span>
+                                                <% } else if (order[i].status === 'Shipped' || order[i].status === 'Out For Delivery') { %>
+                                                    <span class="badge badge-pill badge-dark"><%= order[i].status %></span>
+                                                <% } else if (order[i].status === 'Delivered') { %>
+                                                    <span class="badge badge-pill badge-success"><%= order[i].status %></span>
+                                                <% } else if (order[i].status == 'Return Requested') { %>
+                                                    <span class="badge badge-pill badge-info"><%= order[i].status %> </span>
+                                                <% } else if (order[i].status == 'Return Successfull') { %>
+                                                    <span class="badge badge-pill badge-success"><%= order[i].status %> </span>
+                                                <% } else { %>
+                                                    <span class="badge badge-pill badge-danger"><%= order[i].status %></span>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-end">
+                                                    <a href="/details?orderId=<%=order[i]._id%>" class="btn btn-secondary">Details</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                    
+                                      
+                                </tbody>
+                              </table>
+                              
+                                    </div> <!-- card-body end// -->
+                                    
+                    </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+
+</main><!-- End .main -->
+      
+<%- include('../layouts/footer.ejs') %>
