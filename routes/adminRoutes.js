@@ -16,51 +16,7 @@ const { isLogin, isLogout } = require("../middleware/adminAuth");
 admin_route.set('views', './views/admin');
 admin_route.use(express.static('public'));
 
-// category multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/adminassets/categoryimages');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-// product multer
-const storages = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../public/adminassets/productimages'));
-  },
-  filename: function (req, file, cb) {
-    const name = Date.now() + '-' + file.originalname;
-    cb(null, name);
-  }
-});
-
-const uploads = multer({
-  storage: storages,
-  limits: { fileSize: 10 * 1024 * 1024 },
-});
-const uploadFields = uploads.fields([
-  { name: "image1" },
-  { name: "image2" },
-  { name: "image3" },
-  { name: "image4" },
-]);
-
-// banner 
-const bannerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../public/adminassets/bannerimages"));
-  },
-  filename: (req, file, cb) => {
-    const name = Date.now() + "-" + file.originalname;
-    cb(null, name);
-  },
-});
-const bannerUpload = multer({ storage: bannerStorage });
+const {upload,bannerUpload,uploadFields } = require('../config/multer')
 
 
 admin_route.get('/', isLogout, controller.loginLoad);
