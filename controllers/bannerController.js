@@ -91,9 +91,9 @@ const banneredit = async (req, res) => {
 }
 const updatebanner = async (req, res) => {
     try {
-        const id = req.query.bannerId
-        console.log(id)
-        const bannerData = await Banner.findById(id)
+        const bannerId = req.query.bannerId
+        console.log(bannerId)
+        const bannerData = await Banner.findById(bannerId)
 
         console.log(bannerData);
         if (req.body.title) {
