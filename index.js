@@ -6,7 +6,7 @@ const adminRoute = require('./routes/adminRoutes')
 const mongoose = require('mongoose');
 require("dotenv").config()
 
-mongoose.connect("mongodb://127.0.0.1:27017/AUDIONIX");
+mongoose.connect("mongodb+srv://gokulmr441:Gkul8943@cluster0.fb9m1yj.mongodb.net/AUDIONIX");
 
 mongoose.connection.on('connected', () => {
      console.log('Connected to MongoDB');
