@@ -14,8 +14,8 @@ const { RAZORPAY_ID_KEY, RAZORPAY_SECRET_KEY } = process.env;
 //   key_secret :RAZORPAY_SECRET_KEY
 // })
 const razorpay = new Razorpay({
-  key_id: "rzp_test_5oY7OQD9ot1Vxy",
-  key_secret: "wQ8siy9CCYhbtvi8e7isyQmu"
+  key_id: "rzp_test_8pSgk7L5IGPkos",
+  key_secret: "yotnNU9pTMFcTnCZOQ2Lv1sh"
 })
 
 const calculateSubtotal = (cart) => {
